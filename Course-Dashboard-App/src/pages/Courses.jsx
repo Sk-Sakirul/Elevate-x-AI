@@ -1,6 +1,6 @@
-import React, { useContext, useMemo, useRef, useState } from "react";
+import  {  useMemo, useRef, useState } from "react";
 import CourseItem from "../components/CourseItem";
-import { ThemeContext } from "../context/ThemeProvider";
+
 
 const courses = [
   {
@@ -50,7 +50,8 @@ const courses = [
     duration: 20,
     level: "Intermediate",
     price: 1500,
-    description: "Design and query relational and NoSQL databases efficiently.",
+    description:
+      "Design and query relational and NoSQL databases efficiently.",
   },
   {
     id: 7,
@@ -64,24 +65,28 @@ const courses = [
   },
 ];
 
+
 const Courses = () => {
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("");
-  const inputRef = useRef(null);
+    const [search, setSearch] = useState("");
+    const [category, setCategory] = useState("");
+    const inputRef = useRef(null);
 
-  const { theme, toggleTheme } = useContext(ThemeContext);
+    // const {theme, toggleTheme} = useContext(ThemeContext);
 
-  const filteredCourses = useMemo(() => {
-    return courses
-      .filter((course) =>
-        course.title.toLowerCase().includes(search.toLowerCase()),
-      )
-      .filter((course) =>
-        course.category.toLowerCase().includes(category.toLowerCase()),
-      );
-  }, [search, category]);
 
-  // console.log(category)
+    const filteredCourses = useMemo(() => {
+      return courses
+        .filter((course) =>
+          course.title.toLowerCase().includes(search.toLowerCase()),
+        )
+        .filter((course) =>
+          course.category.toLowerCase().includes(category.toLowerCase()),
+        );
+    }, [search, category]);
+
+    // console.log(category)
+
+    
 
   return (
     <>
@@ -101,12 +106,7 @@ const Courses = () => {
           focus
         </button>
       </div>
-      <button
-        style={{ width: "200px", padding: "6px" }}
-        onClick={() => toggleTheme()}
-      >
-        Switch to {theme === "light" ? "Dark" : "Light"} Mode
-      </button>
+      
       <select
         style={{ width: "200px", padding: "6px" }}
         value={category}
@@ -119,15 +119,13 @@ const Courses = () => {
         <option value="data">Data</option>
       </select>
       <p>showing {filteredCourses.length} courses</p>
-      {filteredCourses.length === 0 ? (
-        <p>Course Not Found</p>
-      ) : (
-        <div className="courses-container">
-          {filteredCourses.map((course) => (
-            <CourseItem key={course.id} course={course} />
-          ))}
-        </div>
-      )}
+      {filteredCourses.length === 0 ?   <p>Course Not Found</p> : 
+      <div className="courses-container">
+        {filteredCourses.map((course) => (
+          <CourseItem key={course.id} course={course} />
+        ))}
+      </div>
+}
     </>
   );
 };

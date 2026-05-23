@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 // import CourseItem from '../components/CourseItem';
 
 const courses = [
@@ -67,7 +67,8 @@ const courses = [
 const CourseDetails = () => {
     let {courseId} = useParams();
     courseId = +courseId;
-    let course = courses.filter((c) => c.id === courseId)
+    let course = courses.filter((c) => c.id === courseId);
+    const navigate = useNavigate();
     // console.log(course);
   return (
     <div>
@@ -90,6 +91,7 @@ const CourseDetails = () => {
           <p>
             <strong>Description</strong> : {c.description}
           </p>
+          <button onClick={() => navigate('/courses')}>Back to courses</button>
         </div>
       ))}
     </div>
